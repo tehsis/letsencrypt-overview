@@ -44,7 +44,6 @@
           <p>Mozilla's Crypto Engineering Team</p>
           <p>Twitter: @JamesPugJones</p>
           <aside class="notes">
-            Because I am old and curmudgeonly...
             What/Where/Why/How
             PKI and Policy
           </aside>
@@ -80,14 +79,14 @@
           </aside>
         </section>
 
-        <section>
+<!--         <section>
           <h2>Sections:</h2>
           <ul>
             <li>What is Let's Encrypt?</li>
             <li>PKI and Policy</li>
             <li>Q &amp; A</li>
           </ul>
-        </section>
+        </section> -->
 
         <section>
           <h2>Security is Important</h2>
@@ -98,7 +97,7 @@
             <li><b>Integrity:</b> Prevent injected <a href="http://arstechnica.com/tech-policy/2014/09/why-comcasts-javascript-ad-injections-threaten-security-net-neutrality/">advertising</a> or <a href="http://www.zdnet.com/article/optus-hands-over-customers-numbers-to-websites/">tracking cookies</a></li>
           </ul>
           <aside class="notes">
-            Without HTTPS, with HTTP, you don't know...
+            Without HTTPS integrity protection... Verizon SuperCookie. ISPs known to replace ads with their own; this happens a lot in China and India.
           </aside>
         </section>
         <section>
@@ -108,36 +107,41 @@
           </blockquote>
           <p>23 Feb 2016, <a href="http://arxiv.org/pdf/1602.07128v1.pdf"><strong>Website-Targeted False Content Injection by Network Operators</strong>, Nakibly, Schcolnik, and Rubin</a></p>
           <aside class="notes">
+            ?
+          </aside>
+        </section>
+
+        <section>
+          <h2>Why Haven't We Fixed This?</h2>
+          <aside class="notes">
+            DAMN YOU, IETF. WHY ISN'T THIS FIXED?
             OK, so security is pretty important. Why isn't it the default?
           </aside>
         </section>
 
         <section>
-          <h2>Getting a Certificate is Hard</h2>
-          <img src="img/hates-installing-certificates.jpg" style="height: 360px;">
-          <ul>
-            <li>Manual process, different for every provider</li>
-            <li>First you have to request a certificate&hellip;</li>
-            <li>&hellip;then you have to figure out how to install it</li>
-          </ul>
-          <aside class="notes">
-            (April)
-            Request: some arcane commands to generate some keys and then what's called a certificate signing request, then copy-paste in some web form, pay money, verify identity, eventually get and install cert
-          </aside>
-        </section>
-
-        <section>
-          <h2>Why is This So Hard?</h2>
+          <h2>It Costs Money</h2>
           <div>
             <video src="video/too-much-money-no-audio.mp4" style="height: 300px;" data-autoplay></video>
           </div>
           <ul>
             <li>Certificates are required to set up a secure website</li>
             <li>The entities selling them want to make money</li>
+          </ul>
+          <aside class="notes">
+            What's even worse than it costing money is that it's about the same cost anywhere in the world, which is a serious impediment to security in emerging markets.
+          </aside>
+        </section>
+
+        <section>
+          <h2>The User Experience is Hard</h2>
+          <img src="img/hates-installing-certificates.jpg" style="height: 360px;">
+          <ul>
+            <li>Manual process, different for every provider</li>
             <li>This leads to things being expensive, difficult, and proprietary</li>
           </ul>
           <aside class="notes">
-            We need something that's free, easy, and open. I'm here to tell you that it exists, it's called LE, and we launched two weeks ago.
+            We need something that's free, easy, and open. I'm here to tell you that it exists, it's called LE, and it launched three months ago.
           </aside>
         </section>
 
@@ -161,54 +165,22 @@
         </section>
 
         <section>
-          <section>
-            <h2>An <u>Automated</u> CA</h2>
-            <img src="img/automated-ca.png" />
-            <ul>
-              <li>Most of the work in issuing a certificate is in verifying domain control</li>
-              <li>Let's Encrypt uses a <a href="https://tools.ietf.org/html/draft-ietf-acme-acme">standard protocol</a> to verify domain control automatically prior to certificate generation</li>
-              <li>Certificate renewals use this same process</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2>Automated Certificate Management Environment (ACME)</h2>
-            <ul>
-              <li>Suppose someone asks for a certificate for <b>example.com</b></li>
-              <li>How do you know they actually own <b>example.com</b>?</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2>Domain Validation</h2>
-            <p>Give them a challenge that only<br />the domain owner can complete:</p>
-            <ul>
-              <li>Provision a DNS record for <br/><b>_acme-challenge.example.com</b></li>
-              <li>Provision a file at <br/><b>http://example.com/.well-known/acme-challenge/</b></li>
-              <li>Configure a TLS server on <b>example.com</b></li>
-            </ul>
-          </section>
-
-          <section>
-            <h2>Automated Validation</h2>
-            <ul>
-              <li>The whole process is laid out in the <a href="https://tools.ietf.org/html/draft-ietf-acme-acme">ACME specification</a>
-              <ul>
-                <li>How you ask for authorization</li>
-                <li>How you fulfill challenges</li>
-                <li>How you ask for certificates</li>
-              </ul>
-              </li>
-              <li>Having a standard protocol means that you can build tools</li>
-              <li>The vision is for ACME to be built into web servers, to auto-configure HTTPS</li>
-            </ul>
-          </section>
+          <h2>An <u>Automated</u> CA</h2>
+          <img src="img/automated-ca.png" />
+          <ul>
+            <li>Most of the work in issuing a certificate is in verifying domain control</li>
+            <li>Let's Encrypt uses a <a href="https://tools.ietf.org/html/draft-ietf-acme-acme">standard protocol</a> to verify domain control automatically prior to certificate generation</li>
+            <li>Certificate renewals use this same process</li>
+          </ul>
         </section>
 
         <section>
           <h2>A <u>Transparent</u> CA</h2>
           <img src="img/certificate-transparency.png" style="height: 300px;">
           <p><a href="https://crt.sh/?Identity=%25&amp;iCAID=7395">All certificates</a> are publicly logged through<br />the <a href="https://www.certificate-transparency.org/">Certificate Transparency</a> system</p>
+          <aside class="notes">
+            Ecosystem often lacks the sunshine we all want. We wanted to build the world's most open CA.
+          </aside>
         </section>
 
         <section>
@@ -221,6 +193,9 @@
             <li>Even <a href="https://github.com/marumari/letsencrypt-overview">this presentation</a>!</li>
           </ul>
           <h2 style="margin-top: 15px;">Pull requests welcome!</h2>
+          <aside class="notes">
+            
+          </aside>
         </section>
 
         <section>
@@ -240,6 +215,30 @@
           </section>
 
           <section>
+            <h2>Automated Certificate Management Environment (ACME)</h2>
+            <ul>
+              <li>Suppose someone asks for a certificate for <b>example.com</b></li>
+              <li>How do you know they actually own <b>example.com</b>?</li>
+            </ul>
+            <aside class="notes">
+              
+            </aside>
+          </section>
+
+          <section>
+            <h2>Domain Validation</h2>
+            <p>Give them a challenge that only<br />the domain owner can complete:</p>
+            <ul>
+              <li>Provision a DNS record for <br/><b>_acme-challenge.example.com</b></li>
+              <li>Provision a file at <br/><b>http://example.com/.well-known/acme-challenge/</b></li>
+              <li>Configure a TLS server on <b>example.com</b></li>
+            </ul>
+            <aside class="notes">
+              
+            </aside>
+          </section>
+
+          <section>
             <h2>An Upcoming Standard</h2>
             <img src="img/ietf-acme.png" style="height: 250px;">
             <ul>
@@ -248,6 +247,17 @@
             </ul>
             <aside class="notes">
               IETF, CA/B Forum
+            </aside>
+          </section>
+
+          <section>
+            <h2>Automated Validation</h2>
+            <ul>
+              <li>Having a standard protocol means that you can build tools</li>
+              <li>The vision is for ACME to be built into web servers, to auto-configure HTTPS</li>
+            </ul>
+            <aside class="notes">
+              When you can do automated validation, using this standard, you can build yourself tooling to just lubricate the whole machinery of securing your web sites.
             </aside>
           </section>
 
