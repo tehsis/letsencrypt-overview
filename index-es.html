@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Let's Encrypt - Overview</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="local-css/letsencrypt.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/beige.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css'
+                                                                : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <div class="slides">
+        <section>
+          <img src="img/letsencrypt-logo-horizontal.svg" class="plain" style="width: 50%;"/>
+          <aside class="notes">
+            Because I am old and curmudgeonly...
+          </aside>
+        </section>
+
+        <section>
+          <h2>Un momento de reflexión historica</h2>
+          <img class="plain" src="img/netscape.jpg" style="height: 380px;">
+          <ul>
+            <li>En 1995, Netscape lanzó un browser con HTTPS</li>
+            <li>Por primera vez, todo el mundo tenia fácil acceso a comunicaciones encriptadas</li>
+          </ul>
+          <aside class="notes">
+            No tenias que ser una coporación con $$$, una agencia gubernamental o un genio en matematicas. Ni siquiera entender PGP y criptografía.
+            Empezando por passwords y CCs, ahora todo: email, social media, articulos de wikipedia, etc. Esto es de suma importancia para Mozilla.
+          </aside>
+        </section>
+
+        <section style="padding-top: 0;">
+          <h2>20 Años despues</h2>
+          <div>
+            <img src="img/encrypted-vs-unencrypted.png" style="height: 380px;">
+          </div>
+          <ul>
+            <li>No hay suficiente HTTPS en Internet
+              <ul>
+                <li><a href="http://mzl.la/1LG5eZp">~40% para la carga inicial</a></li>
+                <li><a href="http://mzl.la/1LG5cAy">~65% de requests siguientes</a></li>
+              </ul>
+            </li>
+          </ul>
+          <aside class="notes">
+            La privacidad y seguridad son fundamentales y no deberian ser tratadas como opcionales
+          </aside>
+        </section>
+
+        <section>
+          <h2>La seguridad es importante</h2>
+          <img src="img/firesheep.png" style="height: 300px;">
+          <ul>
+            <li><b>Confidencialidad:</b> Evitar que <a href="https://gigaom.com/2015/02/19/dont-let-att-mislead-you-about-its-29-privacy-fee/">espien</a> lo que estas haciendo</li>
+            <li><b>Integridad:</b> Prevenir que añadan <a href="http://arstechnica.com/tech-policy/2014/09/why-comcasts-javascript-ad-injections-threaten-security-net-neutrality/">publicidad</a> o <a href="http://www.zdnet.com/article/optus-hands-over-customers-numbers-to-websites/">cookies de seguimiento</a></li>
+            <li><b>Autenticidad:</b> Asegurarte que estas hablando con el sitio real y no siendo <a href="https://citizenlab.org/2015/04/chinas-great-cannon/">parte de un ataque DDoS</a> o estar recibiendo <a href="https://support.google.com/webmasters/answer/3024344">malware</a></li>
+          </ul>
+          <aside class="notes">
+            Sin HTTPS, con HTTP, no podes saberlo...
+          </aside>
+        </section>
+
+        <section>
+          <h2>Obtener un certificado es complicado</h2>
+          <img src="img/hates-installing-certificates.jpg" style="height: 360px;">
+          <ul>
+            <li>Procesos manuales, diferentes para cada proovedor</li>
+            <li>Primero tenes que solicitar un certificado&hellip;</li>
+            <li>&hellip;despues tenes que entender como instalarlo</li>
+          </ul>
+          <aside class="notes">
+            Obtener: usar comandos arcanos para generar ciertas llaves y despues lo que se llama una solicitud de firma de certificado, despues copiar y pegar en algun form web, poner dinero encima, para finalmente obtener e instalar el certificado.
+          </aside>
+        </section>
+
+        <section>
+          <h2>¿Por que es todo tan complicado?</h2>
+          <div>
+            <video src="video/too-much-money-no-audio.mp4" style="height: 300px;" data-autoplay></video>
+          </div>
+          <ul>
+            <li>Los certificados son requeridos para tener un website seguro</li>
+            <li>Las entidades que los venden quien hacer dinero</li>
+            <li>Esto lleva a que sea caro, dificil y propietario</li>
+          </ul>
+          <aside class="notes">
+            Necesitamos algo que sea gratis, facil y abierto. Estoy acá para contarles que eso ya existe y se llama LE
+          </aside>
+        </section>
+
+        <section>
+          <img src="img/letsencrypt-logo-horizontal.svg" class="plain" style="width: 50%;"/>
+          <h2 style="color: #2C3C69; font-family: Gibson, Arial, Helvetica, sans-serif; font-size: 1.6em; font-weight: 600; margin-top: -.25em; text-transform: none;">is a new certificate authority</h2>
+        </section>
+
+        <section>
+          <h2>Una CA <u>gratis</u></h2>
+          <img src="img/gratis.png" style="height: 280px;">
+          <p style="font-style: oblique; margin-top: 0;">Cosas que no importan:</p>
+          <ul>
+            <li>Que puedas pagarlo</li>
+            <li>El lugar donde vivas</li>
+            <li>Que seas un individuo, una organización o una corporación</li>
+          </ul>
+          <aside class="notes">
+            Ya sea un multibillonario un chico de 12 años que acaba de hacer su primer sitio. Dinero == Impuestos y leyes complicadas,
+            limitando opciones y disponibilidad.
+          </aside>
+        </section>
+
+        <section>
+          <section>
+            <h2>Un CA <u>Automatizado</u> CA</h2>
+            <img src="img/automated-ca.png" />
+            <ul>
+              <li>La mayor parte del trabajo en emitir un certificado es verificar que tengas control sobre el dominio</li>
+              <li>Let's Encrypt usa un <a href="https://tools.ietf.org/html/draft-ietf-acme-acme">procotolo estándar</a> para verificar el control sobre el dominio previamente a generar el certificado</li>
+              <li>La renovación de este certificado usa el mismo proceso</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Automated Certificate Management Environment (ACME - Entorno de Administración Automatica de Certificados)</h2>
+            <ul>
+              <li>Imaginemos que alguien solicita un certificado para <b>example.com</b></li>
+              <li>Como sabemos que efectivamente posee <b>example.com</b>?</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Validación del dominio</h2>
+            <p>Dar un desafio que solo el<br />due&nacute;o del dominio pueda completar:</p>
+            <ul>
+              <li>Crear un registro DNS para <br/><b>_acme-challenge.example.com</b></li>
+              <li>Poner un archivo en <br/><b>http://example.com/.well-known/acme-challenge/</b></li>
+              <li>Configurar un servidor TLS en <b>example.com</b></li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Validaci&oacute;n automática</h2>
+            <ul>
+              <li>Todo el proceso esta detallado en <a href="https://tools.ietf.org/html/draft-ietf-acme-acme">la especificación de ACME</a>
+              <ul>
+                <li>Como solicitar autorización</li>
+                <li>Como completar los desafios</li>
+                <li>Coo solicitar los certificados</li>
+              </ul>
+              </li>
+              <li>Tener un protocolo estándar significa que podes construir herramientas</li>
+              <li>La visión de ACME es estar integrado en los servidores web para auto-configurar HTTPS</li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <h2>Un CA <u>transparente</u></h2>
+          <img src="img/certificate-transparency.png" style="height: 300px;">
+          <p><a href="https://crt.sh/?Identity=%25&amp;iCAID=7395">Todos los certificados</a> son registrados publicamente a través<br />de el sistema <a href="https://www.certificate-transparency.org/">Certificate Transparency</a></p>
+        </section>
+
+        <section>
+          <h2>Un CA <u>Abierto</u></h2>
+          <p>Todo lo que usa Let's Encrypt es Open Source:</p>
+          <img src="img/github-repo.png" style="height: 240px; margin: 0;">
+          <ul>
+            <li>El software que ejecuta la  <a href="https://github.com/letsencrypt/boulder/">autoridad certificante</a></li>
+            <li>El software que usas para <a href="https://github.com/letsencrypt/letsencrypt/">obtener un certificado</a></li>
+            <li>Incluso <a href="https://github.com/tehsis/letsencrypt-overview">esta presentación</a>!
+              <ul>
+                <li>Que por cierto es un fork de <a href="https://github.com/jcjones/letsencrypt-overview">esta otra presentación</a></li>
+              </ul>
+            </li>
+          </ul>
+          <h2 style="margin-top: 15px;">¡Se agradecen los Pull requests y forks!</h2>
+        </section>
+
+        <section>
+          <section>
+            <h2>Una CA <u>Cooperativa</u></h2>
+            <a href="https://letsencrypt.org/sponsors/">
+              <img style="height: 350px" src="img/sponsors.png"/>
+            </a>
+            <ul>
+              <li>Amplio apoyo de la industria</li>
+              <li>Desarrollado y soportado por la comunidad</li>
+              <li>Construye un estándar abierto para todas las CAs</li>
+            </ul>
+            <aside class="notes">
+              Sponsors fundadores: Akamai, Cisco, and EFF.
+            </aside>
+          </section>
+
+          <section>
+            <h2>Integración con distintas plataformas</h2>
+            <ul>
+              <li><a href="https://community.akamai.com/thread/2782">Akamai</a> (beta)</li>
+              <li><a href="https://caddyserver.com/">Caddy</a> HTTP/2 server (<a href="#caddy-demo">demo</a>)</li>
+              <li><a href="https://www.dreamhost.com/blog/2015/12/03/lets-encrypt-and-dreamhost/">Dreamhost</a> (pronto)</li>
+              <li><a href="https://wiki.mozilla.org/Security/Automation/Winter_Of_Security_2015/Certificate_Automation_tooling_for_Lets_Encrypt">nginx</a> (pronto)</li>
+              <li>[ Tu nombre aquí ]</li>
+            </ul>
+            <aside class="notes">
+              Esto ocurre gracias a que esta construido sobre un estándar abierto.
+            </aside>
+          </section>
+
+          <section>
+            <h2>Un estándar en proceso</h2>
+            <img src="img/ietf-acme.png" style="height: 250px;">
+            <ul>
+              <li>El protocolo ACME se encuentra en proceso de  <a href="https://tools.ietf.org/wg/acme/">estandarización por la IETF</a> para que pueda ser usado por todas las CAs</li>
+              <li>La ayuda a usuarios se realiza mediante un <a href="https://community.letsencrypt.org/">sistema de soporte comunitario</a></li>
+            </ul>
+            <aside class="notes">
+              La demo que les estoy mostrando, un muchacho que escribio un cliente sin relacion a LE, la realizo alguien ageno a mozilla, que no tiene relación con LE y que lo realizo sin el conocimiento de LE, lo puso en youtube y lo encontraron y lo difunden
+            </aside>
+          </section>
+
+          <section id="caddy-demo">
+            <h2>El futuro</h2>
+            <video style="height: 500px;" src="video/caddy.mp4" controls></video>
+            <aside class="notes">
+              Bueno, y ¿ahora que?
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <h2>¡Esta linea sigue creciendo!</h2>
+          <a href="https://letsencrypt.org/stats/">
+            <img class="img-fallback" style="height: 500px"
+                 src="https://plot.ly/~letsencrypt/7.png"
+                 data-fallback="img/le-cert-graph.png"/>
+          </a>
+          <aside class="notes">
+            GA on December 3rd, refer to the current numbers
+          </aside>
+        </section>
+
+        <section>
+          <h2>Solo el comienzo&hellip;</h2>
+          <ul>
+            <li>Disponible para el publico general desde el 3 de diciembre de 2015 y ya es el 5<sup style="font-size: .8em; position: relative; top: -.4em; vertical-align: baseline;">to</sup> proveedor de certificados más grande</li>
+            <li class="fragment" style="margin-top: .75em;">Lograr que todos los sitios usen HTTPS</li>
+            <li class="fragment">Asegurar <em>todo</em> internet: email, chat, ¡y más!</li>
+          </ul>
+          <aside class="notes">
+            Antes de terminar, les dejo un mensaje.
+          </aside>
+        </section>
+
+        <section>
+          <h2>Un mensaje para el mundo</h2>
+          <img src="img/verifiedby.png" style="height: 400px;">
+        </section>
+
+        <section>
+          <img src="img/letsencrypt-logo-horizontal.svg" class="plain" style="width: 50%;"/>
+        </section>
+
+      </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        slideNumber: 'c/t',
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/notes/notes.js', async: true }
+        ]
+      });
+
+      // If an image has a class "img-fallback" and fails to load, then
+      // fall back to loading the img from the "data-fallback" attribute.
+      for (img of document.getElementsByClassName('img-fallback')) {
+        img.addEventListener("error", function(){
+          this.src = this.getAttribute("data-fallback");
+        });
+      }
+
+    </script>
+
+  </body>
+</html>
