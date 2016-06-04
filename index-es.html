@@ -41,7 +41,7 @@
         <section>
           <img src="img/letsencrypt-logo-horizontal.svg" class="plain" style="width: 50%;"/>
           <aside class="notes">
-            Because I am old and curmudgeonly...
+		Presentación personal. Mozilla (proteger internet. usuarios). Desarrollador. Usuario de Internet.
           </aside>
         </section>
 
@@ -53,6 +53,7 @@
             <li>Por primera vez, todo el mundo tenia fácil acceso a comunicaciones encriptadas</li>
           </ul>
           <aside class="notes">
+            HTTPS. (Comunicaciones encriptadas)
             No tenias que ser una coporación con $$$, una agencia gubernamental o un genio en matematicas. Ni siquiera entender PGP y criptografía.
             Empezando por passwords y CCs, ahora todo: email, social media, articulos de wikipedia, etc. Esto es de suma importancia para Mozilla.
           </aside>
@@ -82,10 +83,11 @@
           <ul>
             <li><b>Confidencialidad:</b> Evitar que <a href="https://gigaom.com/2015/02/19/dont-let-att-mislead-you-about-its-29-privacy-fee/">espien</a> lo que estas haciendo</li>
             <li><b>Integridad:</b> Prevenir que añadan <a href="http://arstechnica.com/tech-policy/2014/09/why-comcasts-javascript-ad-injections-threaten-security-net-neutrality/">publicidad</a> o <a href="http://www.zdnet.com/article/optus-hands-over-customers-numbers-to-websites/">cookies de seguimiento</a></li>
-            <li><b>Autenticidad:</b> Asegurarte que estas hablando con el sitio real y no siendo <a href="https://citizenlab.org/2015/04/chinas-great-cannon/">parte de un ataque DDoS</a> o estar recibiendo <a href="https://support.google.com/webmasters/answer/3024344">malware</a></li>
+            <li><b>Autenticidad:</b> Estas hablando con el sitio real y no siendo <a href="https://citizenlab.org/2015/04/chinas-great-cannon/">parte de un ataque DDoS</a> o estar recibiendo <a href="https://support.google.com/webmasters/answer/3024344">malware</a></li>
           </ul>
           <aside class="notes">
             Sin HTTPS, con HTTP, no podes saberlo...
+            No solo yo, tambien los otros.
           </aside>
         </section>
 
@@ -139,7 +141,7 @@
 
         <section>
           <section>
-            <h2>Un CA <u>Automatizado</u> CA</h2>
+            <h2>Un CA <u>Automatizado</u></h2>
             <img src="img/automated-ca.png" />
             <ul>
               <li>La mayor parte del trabajo en emitir un certificado es verificar que tengas control sobre el dominio</li>
@@ -151,18 +153,18 @@
           <section>
             <h2>Automated Certificate Management Environment (ACME - Entorno de Administración Automatica de Certificados)</h2>
             <ul>
-              <li>Imaginemos que alguien solicita un certificado para <b>example.com</b></li>
-              <li>Como sabemos que efectivamente posee <b>example.com</b>?</li>
+              <li>Imaginemos que alguien solicita un certificado para <b>ejemplo.com</b></li>
+              <li>Como sabemos que efectivamente posee <b>ejemplo.com</b>?</li>
             </ul>
           </section>
 
           <section>
             <h2>Validación del dominio</h2>
-            <p>Dar un desafio que solo el<br />due&nacute;o del dominio pueda completar:</p>
+            <p>Dar un desafio que solo el<br />dueñoo del dominio pueda completar:</p>
             <ul>
-              <li>Crear un registro DNS para <br/><b>_acme-challenge.example.com</b></li>
+              <li>Crear un registro DNS para <br/><b>_acme-challenge.ejemplo.com</b></li>
               <li>Poner un archivo en <br/><b>http://example.com/.well-known/acme-challenge/</b></li>
-              <li>Configurar un servidor TLS en <b>example.com</b></li>
+              <li>Configurar un servidor TLS en <b>ejemplo.com</b></li>
             </ul>
           </section>
 
@@ -173,7 +175,7 @@
               <ul>
                 <li>Como solicitar autorización</li>
                 <li>Como completar los desafios</li>
-                <li>Coo solicitar los certificados</li>
+                <li>Como solicitar los certificados</li>
               </ul>
               </li>
               <li>Tener un protocolo estándar significa que podes construir herramientas</li>
@@ -275,7 +277,9 @@
             <li class="fragment">Asegurar <em>todo</em> internet: email, chat, ¡y más!</li>
           </ul>
           <aside class="notes">
-            Antes de terminar, les dejo un mensaje.
+	    invitar a sumarse a la comunidad de Mozilla.
+	    invitar a hackaton Hacks/Hackers sobre Panama Papers.
+            Un mensaje para el mundo.
           </aside>
         </section>
 
